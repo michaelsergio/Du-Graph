@@ -65,3 +65,43 @@ function() {
              top.concat('\n', middle, '\n', bottom) :
              top.concat('\n',  bottom);
 };
+
+UdGraph.prototype.output =
+function(id, width, height) {
+  var paper = Rapheal(id, width, height);
+  var spacing = 1;
+
+  var lineWidth = 1;
+  var lineHeight = 4;
+  var roundedCorners = 0;
+
+  var middleHeight = 2;
+
+  var startingPoint = 5;
+
+  var pencilX = startingPoint;
+  var pencilY = width / 2.0;
+
+  for (var i = 0; i < this.sample.length; i++) {
+    // check for top and bottom
+    if (this.frequencyFunction(this.sample[i]) === null) {
+    }
+    else if (this.frequencyFunction(this.sample[i]) > this.frequencyThreshold) {
+      paper.rect(pencilX, pencilY + lineHeight, 
+                 lineWidth, lineHeight, roundedCorners);
+    }
+    else {
+      paper.rect(pencilX, pencilY, 
+                 lineWidth, lineHeight, roundedCorners);
+    }
+    
+    // Check for middle
+    if (this.shouldDisplayMiddle &&
+        this.middlePredicate(this.sample[i])) {
+      paper.rect(pencilX, pencilY, 
+                 lineWidth, middleHeight, roundedCorners);
+    }
+
+    pencilX += lineWidth + spacing;
+  };
+}
