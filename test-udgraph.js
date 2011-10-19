@@ -7,11 +7,13 @@ function testNumbers() {
   };
   
   var udgraph = new UdGraph(settings);
+
   var graphstr = udgraph.consoleString();
   var summary = udgraph.topValue() + ' / ' + udgraph.bottomValue();
-
   console.log(centerTitle(summary, graphstr)); 
   console.log(graphstr);
+
+  udgraph.output("number-graph", 200, 200);
 }
 
 function testTeam() {
@@ -31,25 +33,25 @@ function testTeam() {
     {win:1, home:true}
   ];
 
-function wasHome(record) { return record.home;} 
-function winValue(record) { return record.win;} 
+  function wasHome(record) { return record.home;} 
+  function winValue(record) { return record.win;} 
 
-var settings = {
-  sample:gameRecords,
-  frequencyThreshold:0,
-  frequencyFunction:winValue,
-  middlePredicate:wasHome,
-  shouldDisplayMiddle:true
-} 
+  var settings = {
+    sample:gameRecords,
+    frequencyThreshold:0,
+    frequencyFunction:winValue,
+    middlePredicate:wasHome,
+    shouldDisplayMiddle:true
+  } 
 
-var udgraph = new UdGraph(settings);
-var graphstr = udgraph.consoleString()
+  var udgraph = new UdGraph(settings);
+  var graphstr = udgraph.consoleString()
 
-var summary = udgraph.topValue() + ' / ' + udgraph.bottomValue();
+  var summary = udgraph.topValue() + ' / ' + udgraph.bottomValue();
+  console.log(centerTitle(summary, graphstr)); 
+  console.log(graphstr);
 
-console.log(centerTitle(summary, graphstr)); 
-console.log(graphstr);
-
+  udgraph.output("team-graph", 200, 200);
 }
 
 function centerTitle(title, graphstr) {
